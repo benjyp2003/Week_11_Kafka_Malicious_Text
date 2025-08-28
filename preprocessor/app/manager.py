@@ -19,11 +19,13 @@ class Manager:
                     print(msg.value)
                     update = Update(msg.value)
                     new_data = update.clean_and_update_text()
+
                     self.producer.publish_message("preprocessed_tweets_antisemitic",new_data)
 
                 elif msg.topic == topic2:
                     update = Update(msg.value)
                     new_data = update.clean_and_update_text()
+
                     self.producer.publish_message("preprocessed_tweets_not_antisemitic", new_data)
         except Exception as e:
                 raise Exception(f"Error consuming messages from topic {topic1} and {topic2}: {e}")
