@@ -31,7 +31,6 @@ class Cleaner:
         ps = PorterStemmer()
         lemtied_data = [ps.stem(word) for word in self.clean_data.split()]
         self.clean_data = ' '.join(lemtied_data)
-        #self.clean_data = ""
 
     def manager_cleaner(self):
         self.removing_all_marks()
