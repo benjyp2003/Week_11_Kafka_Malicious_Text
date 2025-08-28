@@ -1,10 +1,14 @@
 import string
+
+import nltk
+nltk.download('punkt')
+nltk.download('stopwords')
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 
 
 class Cleaner:
-    def __init__(self,data:str):
+    def __init__(self,data :str):
         self.data = data
         self.clean_data = data
 

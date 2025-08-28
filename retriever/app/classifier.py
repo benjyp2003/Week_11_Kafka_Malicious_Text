@@ -1,4 +1,4 @@
-from dal import Dal
+
 class Classifier:
 
     def classify_docs(self, document) -> dict:
@@ -17,10 +17,5 @@ class Classifier:
 
         except Exception as e:
             raise Exception(f"Error classifying document: {e}")
-if __name__ == "__main__":
-    classifier = Classifier()
-    dal = Dal("tweets")
-    docs = dal.fetch_100_latest_docs()
-    classified_docs = classifier.classify_docs(docs)
-    for a , b in classified_docs.items():
-        print(a,b)
+
+
