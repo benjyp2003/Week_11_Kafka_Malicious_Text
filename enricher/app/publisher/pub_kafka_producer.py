@@ -1,5 +1,3 @@
-# from pub_kafka_configurations import ProducerConfig
-
 class ProducerSet:
     def __init__(self,producer_config ):
         self.producer_con = producer_config

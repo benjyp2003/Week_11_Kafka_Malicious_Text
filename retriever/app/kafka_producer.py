@@ -10,15 +10,9 @@ class Producer:
 
     def get_producer_config(self):
         try:
-            # The Producer object requires the Kafka server, Json serializer
-            # producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
-            #                          api_version=(0, 11, 5),
-            #                          value_serializer=lambda x:
-            #                          json.dumps(x, default=self.json_serializer).encode('utf-8'))
             producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
                                      value_serializer=lambda x:
                                      json.dumps(x, default=self.json_serializer).encode('utf-8'))
-            print(producer.config)
 
             return producer
 

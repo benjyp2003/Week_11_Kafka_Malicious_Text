@@ -1,12 +1,14 @@
 import string
+
+import nltk
+nltk.download('punkt')
+nltk.download('stopwords')
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 
 
-
-
 class Cleaner:
-    def __init__(self,data:str):
+    def __init__(self,data :str):
         self.data = data
         self.clean_data = data
 
@@ -33,7 +35,7 @@ class Cleaner:
         ps = PorterStemmer()
         lemtied_data = [ps.stem(word) for word in self.clean_data.split()]
         self.clean_data = ' '.join(lemtied_data)
-        #self.clean_data = ""
+
     def manager_cleaner(self):
         self.removing_all_marks()
         self.removing_long_spaces()
