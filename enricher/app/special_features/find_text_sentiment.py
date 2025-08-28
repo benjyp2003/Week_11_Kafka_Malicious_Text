@@ -1,7 +1,3 @@
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
-import nltk
-
-
 
 def find_text_emotion(txt, sentiment):
     """find and returns the emotion of the text in a given doc field"""

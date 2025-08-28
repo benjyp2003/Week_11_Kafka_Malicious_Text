@@ -1,9 +1,11 @@
+import re
+
 def check_for_weapons_in_text(txt: str, weapons: list[str]) -> list:
     """Check if the given field contains weapons"""
     try:
         found_weapons_list = []
         for weapon in weapons:
-            if weapon in txt:
+            if weapon in txt.split():
                 found_weapons_list.append(weapon)
 
         return found_weapons_list
