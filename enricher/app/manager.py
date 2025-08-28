@@ -4,7 +4,6 @@ from nltk.sentiment import SentimentIntensityAnalyzer
 from enricher.app.special_features.find_text_sentiment import find_text_emotion
 
 nltk.download('vader_lexicon')  # Compute sentiment labels
-from utils.cleaner import Cleaner
 from enricher.app.publisher.pub_kafka_configurations import ProducerConfig
 
 from enricher.app.publisher.pub_kafka_producer import ProducerSet
@@ -27,11 +26,15 @@ class Manager:
             event = self.consumer.get_consumer_events(topic1, topic2)
             for msg in event:
                 if msg.topic == topic1:
+                    print(msg.value)
                     updated_data = self.update_docs(msg.value)
+                    print(updated_data)
                     self.producer.publish_message("enriched_preprocessed_tweets_antisemitic", updated_data)
 
                 elif msg.topic == topic2:
+                    print(msg.value)
                     updated_data = self.update_docs(msg.value)
+                    print(updated_data)
                     self.producer.publish_message("enriched_preprocessed_tweets_not_antisemitic", updated_data)
         except Exception as e:
             raise Exception(f"Error processing messages: {e}")
@@ -39,15 +42,13 @@ class Manager:
     def update_docs(self, docs: list[dict]):
         try:
             updated_docs = docs.copy()
-            counter = 0
             print(updated_docs)
             for doc in updated_docs:
                 text = doc["clean_text"]
-                found_weapons = check_for_weapons_in_text(self.weapons, text)
+                found_weapons = check_for_weapons_in_text(text, self.weapons.split())
                 doc["weapons_detected"] = found_weapons
                 doc["relevant_timestamp"] = find_relevant_time_stamp(text)
                 doc["sentiment"] = find_text_emotion(text, self.sentiment)
-                counter += 1
             print(updated_docs)
             return updated_docs
         except Exception as e:
@@ -57,8 +58,8 @@ class Manager:
 
 
 
-if __name__ == "_main_":
+if __name__ == "__main__":
     manager = Manager()
-    manager.process_messages("enriched_preprocessed_tweets_antisemitic","enriched_preprocessed_tweets_not_antisemitic")
+    manager.process_messages("preprocessed_tweets_antisemitic","preprocessed_tweets_not_antisemitic")
 
 
