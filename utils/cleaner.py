@@ -1,10 +1,7 @@
 import string
-
-#import nltk
 from nltk.corpus import stopwords
-#nltk.download('stopwords')
 from nltk.stem import PorterStemmer
-#nltk.download("punkt")
+
 
 
 

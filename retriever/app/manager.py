@@ -1,3 +1,5 @@
+from time import sleep
+
 from classifier import Classifier
 from dal import Dal
 from kafka_producer import Producer
@@ -11,13 +13,15 @@ class Manager:
 
     def publish_messages(self):
         try:
-            docs = self.dal.fetch_100_latest_docs()
-            classified_docs = self.classifier.classify_docs(docs)
-            self.producer.publish("raw_tweets_antisemitic", classified_docs.get("antisemitic"))
-            print("Published antisemitic tweets successfully.")
-            self.producer.publish("raw_tweets_not_antisemitic", classified_docs.get("not_antisemitic"))
-            print("Published not antisemitic tweets successfully.")
-            self.producer.flush()
+            while True:
+                docs = self.dal.fetch_100_latest_docs()
+                classified_docs = self.classifier.classify_docs(docs)
+                self.producer.publish("raw_tweets_antisemitic", classified_docs.get("antisemitic"))
+                print("Published antisemitic tweets successfully.")
+                self.producer.publish("raw_tweets_not_antisemitic", classified_docs.get("not_antisemitic"))
+                print("Published not antisemitic tweets successfully.")
+                self.producer.flush()
+                sleep(60)
 
         except Exception as e:
             raise Exception(f"Error publishing messages: {e}")
