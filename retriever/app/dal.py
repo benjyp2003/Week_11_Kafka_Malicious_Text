@@ -19,7 +19,7 @@ class Dal:
             with MongoClient(self.uri) as client:
                 self.db = client[self.database_name]
                 collection = self.db[self.collection_name]
-                result = list(collection.find().sort({ 'CreateDate': 1 }).skip(self.counter).limit(100))
+                result = list(collection.find({}, {"_id": 0}).sort({ 'CreateDate': 1 }).skip(self.counter).limit(100))
                 self.counter += 100
                 return result
 

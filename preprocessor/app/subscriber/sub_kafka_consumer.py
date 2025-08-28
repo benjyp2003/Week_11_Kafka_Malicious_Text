@@ -1,8 +1,8 @@
-from sub_kafka_configurations import ConsumerConfig
+#from sub_kafka_configurations import ConsumerConfig
 
 
 class ConsumerSet:
-    def __init__(self,consumer_config:ConsumerConfig,topic):
+    def __init__(self,consumer_config,topic):
         self.topic = topic
         self.consumer_con = consumer_config
         self.events = self.consumer_con.get_consumer_events(self.topic)
@@ -17,10 +17,10 @@ class ConsumerSet:
         for message in self.events:
             return message.value
 
-if __name__ == '__main__':
-    consumer_antisemitic = ConsumerSet(ConsumerConfig(),"raw_tweets_antisemitic")
-    #consumer_antisemitic.print_messages()
-    consumer_antisemitic.get_messages_in_list()
-    consumer_not_antisemitic = ConsumerSet(ConsumerConfig(), "raw_tweets_not_antisemitic")
-    #consumer_not_antisemitic.print_messages()
-    consumer_not_antisemitic.get_messages_in_list()
+# if __name__ == '__main__':
+#     consumer_antisemitic = ConsumerSet(ConsumerConfig(),"raw_tweets_antisemitic")
+#     #consumer_antisemitic.print_messages()
+#     print(consumer_antisemitic.get_messages_in_list())
+#     consumer_not_antisemitic = ConsumerSet(ConsumerConfig(), "raw_tweets_not_antisemitic")
+#     #consumer_not_antisemitic.print_messages()
+#     print(consumer_not_antisemitic.get_messages_in_list())

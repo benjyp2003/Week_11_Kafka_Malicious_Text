@@ -4,8 +4,8 @@ from kafka_producer import Producer
 
 
 class Manager:
-    def __init__(self):
-        self.producer = Producer()
+    def __init__(self,producer:Producer):
+        self.producer = producer
         self.dal = Dal("tweets")
         self.classifier = Classifier()
 
@@ -17,6 +17,7 @@ class Manager:
             print("Published antisemitic tweets successfully.")
             self.producer.publish("raw_tweets_not_antisemitic", classified_docs.get("not_antisemitic"))
             print("Published not antisemitic tweets successfully.")
+            self.producer.flush()
 
         except Exception as e:
             raise Exception(f"Error publishing messages: {e}")

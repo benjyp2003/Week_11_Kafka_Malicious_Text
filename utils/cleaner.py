@@ -37,9 +37,15 @@ class Cleaner:
         lemtied_data = [ps.stem(word) for word in self.clean_data.split()]
         self.clean_data = ' '.join(lemtied_data)
         #self.clean_data = ""
+    def manager_cleaner(self):
+        self.removing_all_marks()
+        self.removing_long_spaces()
+        self.convert_to_lowercase()
+        self.removing_stop_words()
+        self.lemtization()
 
 if __name__ == "__main__":
-    cleaner = Cleaner("""This#$ is a sample/   sentenTCce, @@#@$  showing off   REYE    the stop words filtration.""")
+    cleaner = Cleaner("""This#$ is a"" sample/   sentenTCce, @@#@$  showing off   REYE    the stop words filtration.""")
     print(cleaner.clean_data)
     cleaner.removing_all_marks()
     print(cleaner.clean_data)
@@ -51,4 +57,5 @@ if __name__ == "__main__":
     print(cleaner.clean_data)
     cleaner.lemtization()
     print(cleaner.clean_data)
+
 
