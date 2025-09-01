@@ -15,6 +15,11 @@ class Dal:
 
     def insert_docs(self, docs, collection_name: str):
         try:
+             # Add validation for empty docs
+            if not docs or len(docs) == 0:
+                print(f"Warning: Received empty document list for collection {collection_name}")
+                return
+                
             with MongoClient(self.uri) as client:
                 self.db = client[self.database_name]
                 collection = self.db[collection_name]

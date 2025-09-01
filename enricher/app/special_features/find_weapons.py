@@ -11,4 +11,4 @@ def check_for_weapons_in_text(txt: str, weapons: list[str]) -> list:
         return found_weapons_list
 
     except Exception as e:
-        raise Exception(f"An error occurred while checking for weapons in text: {e}")
+        raise Exception(f"An error occurred

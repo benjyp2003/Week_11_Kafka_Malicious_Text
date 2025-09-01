@@ -1,10 +1,7 @@
 from publisher.pub_kafka_producer import ProducerSet
 from publisher.pub_kafka_configurations import ProducerConfig
 from update_data import Update
-
-from subscriber.sub_kafka_configurations import ConsumerConfig
-
-
+from time import time
 
 class Manager:
     def __init__(self):
