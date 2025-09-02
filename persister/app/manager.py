@@ -1,4 +1,4 @@
-from persister.app.dal import Dal
+from dal import Dal
 from subscriber.sub_kafka_configurations import ConsumerConfig
 
 

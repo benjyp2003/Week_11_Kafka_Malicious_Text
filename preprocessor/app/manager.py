@@ -19,6 +19,7 @@ class Manager:
                     print(msg.value)
                     update = Update(msg.value)
                     new_data = update.clean_and_update_text()
+                    print(new_data)
 
                     self.producer.publish_message("preprocessed_tweets_antisemitic",new_data)
 

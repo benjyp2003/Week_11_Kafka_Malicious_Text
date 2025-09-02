@@ -1,16 +1,16 @@
 import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
 
-from enricher.app.special_features.find_text_sentiment import find_text_emotion
+from special_features.find_text_sentiment import find_text_emotion
 
 nltk.download('vader_lexicon')  # Compute sentiment labels
-from enricher.app.publisher.pub_kafka_configurations import ProducerConfig
+from publisher.pub_kafka_configurations import ProducerConfig
 
-from enricher.app.publisher.pub_kafka_producer import ProducerSet
-from enricher.app.special_features.find_relevant_time_stamp import find_relevant_time_stamp
-from enricher.app.special_features.find_weapons import check_for_weapons_in_text
-from enricher.app.subscriber.sub_kafka_configurations import ConsumerConfig
-from enricher.app.weapon_processing.weapons_cleaning import get_clean_weapons
+from publisher.pub_kafka_producer import ProducerSet
+from special_features.find_relevant_time_stamp import find_relevant_time_stamp
+from special_features.find_weapons import check_for_weapons_in_text
+from subscriber.sub_kafka_configurations import ConsumerConfig
+from weapon_processing.weapons_cleaning import get_clean_weapons
 
 
 class Manager:

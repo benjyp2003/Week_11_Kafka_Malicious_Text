@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 class Connector:
-    def __init__(self, uri="mongodb://localhost:27017/", db_name="tweets"):
+    def __init__(self, uri="mongodb://mongodb:27017/", db_name="tweets"):
         self.uri = uri
         self.client = MongoClient(self.uri)
         self.db = self.client[db_name]
