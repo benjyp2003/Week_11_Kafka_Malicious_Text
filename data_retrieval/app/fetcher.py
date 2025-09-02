@@ -1,6 +1,13 @@
 from pymongo import MongoClient
+import os
+
 class Connector:
-    def __init__(self, uri="mongodb://localhost:27017/", db_name="tweets"):
+    def __init__(self, uri=None, db_name="tweets"):
+        if uri is None:
+            # Use environment variable or default to Docker container name
+            mongo_host = os.getenv('MONGO_HOST', 'mongodb')
+            mongo_port = os.getenv('MONGO_PORT', '27017')
+            uri = f"mongodb://{mongo_host}:{mongo_port}/"
         self.uri = uri
         self.client = MongoClient(self.uri)
         self.db = self.client[db_name]

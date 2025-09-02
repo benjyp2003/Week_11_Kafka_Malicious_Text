@@ -1,4 +1,4 @@
-from persister.app.dal import Dal
+from dal import Dal
 from subscriber.sub_kafka_configurations import ConsumerConfig
 
 
@@ -14,9 +14,11 @@ class Manager:
             for msg in event:
                 if msg.topic == topic1:
                     self.dal.insert_docs(msg.value, "tweets_antisemitic")
+                    print("saved antisemitic tweets to mongo successfully.")
 
                 elif msg.topic == topic2:
                     self.dal.insert_docs(msg.value, "tweets_not_antisemitic")
+                    print("saved not antisemitic tweets to mongo successfully.")
         except Exception as e:
                 raise Exception(f"Error consuming messages from topic {topic1} and {topic2}: {e}")
 

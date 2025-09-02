@@ -1,4 +1,4 @@
-from enricher.app.weapon_processing.weapons_loader import load_weapons_data
+from app.weapon_processing.weapons_loader import load_weapons_data
 from utils.cleaner import Cleaner
 
 def get_clean_weapons() -> str:

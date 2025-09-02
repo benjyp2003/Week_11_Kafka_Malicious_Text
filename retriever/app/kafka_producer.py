@@ -2,6 +2,7 @@ from kafka import KafkaProducer
 import json
 from bson import ObjectId
 from datetime import datetime
+import os
 
 
 class Producer:
@@ -10,13 +11,28 @@ class Producer:
 
     def get_producer_config(self):
         try:
-            producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
-                                     value_serializer=lambda x:
-                                     json.dumps(x, default=self.json_serializer).encode('utf-8'))
-
+            kafka_url = os.getenv('KAFKA_URL', 'localhost')
+            kafka_port = os.getenv('KAFKA_PORT', '9092')
+            bootstrap_servers = [f'{kafka_url}:{kafka_port}']
+            
+            print(f"Attempting to connect to Kafka at: {bootstrap_servers}")
+            
+            # Add retry logic and connection timeout
+            producer = KafkaProducer(
+                bootstrap_servers=bootstrap_servers,
+                value_serializer=lambda x: json.dumps(x, default=self.json_serializer).encode('utf-8'),
+                retries=5,
+                retry_backoff_ms=1000,
+                request_timeout_ms=30000,
+                api_version=(2, 0, 2),
+                acks='all'
+            )
+            
+            print("Successfully connected to Kafka!")
             return producer
 
         except Exception as e:
+            print(f"Failed to connect to Kafka: {e}")
             raise Exception(f"Error configuring Kafka producer: {e}")
 
     def json_serializer(self, obj):

@@ -43,18 +43,5 @@ class Cleaner:
         self.removing_stop_words()
         self.lemtization()
 
-if __name__ == "__main__":
-    cleaner = Cleaner("""This#$ is a"" sample/   sentenTCce, @@#@$  showing off   REYE    the stop words filtration.""")
-    print(cleaner.clean_data)
-    cleaner.removing_all_marks()
-    print(cleaner.clean_data)
-    cleaner.removing_long_spaces()
-    print(cleaner.clean_data)
-    cleaner.convert_to_lowercase()
-    print(cleaner.clean_data)
-    cleaner.removing_stop_words()
-    print(cleaner.clean_data)
-    cleaner.lemtization()
-    print(cleaner.clean_data)
 
 

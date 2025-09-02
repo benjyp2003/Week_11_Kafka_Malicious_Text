@@ -5,10 +5,20 @@ class ConsumerConfig:
 
     @staticmethod
     def get_consumer_events(topic1,topic2):
+        import os
+        kafka_url = os.getenv('KAFKA_URL', 'localhost')
+        kafka_port = os.getenv('KAFKA_PORT', '9092')
+        group_id = os.getenv('KAFKA_GROUP_ID', 'my-group')
+        bootstrap_servers = [f'{kafka_url}:{kafka_port}']
 
+        print(f"Connecting to Kafka at: {bootstrap_servers}")
+        
         consumer = KafkaConsumer(topic1,topic2,
-                                 group_id='my-group',
+                                 group_id=group_id,
                                  value_deserializer=lambda m: json.loads(m.decode('ascii')),
-                                 bootstrap_servers=['localhost:9092'])
+                                 bootstrap_servers=bootstrap_servers,
+                                 request_timeout_ms=30000,
+                                 api_version=(2, 0, 2),
+                                 auto_offset_reset='latest')
 
         return consumer
