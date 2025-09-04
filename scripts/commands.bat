@@ -1,5 +1,3 @@
-rem run mongo container
-docker run -d --name mongo -p 27017:27017 mongo:latest
+rem run docker-compose
 
-rem run kafka  container
-
+docker compose up -d

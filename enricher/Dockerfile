@@ -1,20 +1,4 @@
-#FROM python:3.11-slim
-#
-#ENV PYTHONUNBUFFERED=1
-#
-#WORKDIR /app
-#
-#COPY enricher/requirements.txt .
-#
-#RUN pip install --no-cache-dir -r requirements.txt
-#
-#COPY utils/ ./utils/
-#
-#COPY enricher/ ./
-#
-#WORKDIR /app/app
-#ENV PYTHONPATH=/app
-#CMD ["python", "app/app/manager.py"]
+
 FROM python:3.11-slim
 
 ENV PYTHONUNBUFFERED=1
